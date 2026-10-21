@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SPDX-License-Identifier: GPL-3.0-only
+-->
+<helium314.keyboard.keyboard.clipboard.ClipboardHistoryView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="vertical"
+    android:visibility="gone"
+    android:background="@android:color/transparent"
+    android:paddingTop="6dp"
+    style="?attr/clipboardHistoryViewStyle">
+
+    <LinearLayout
+        android:id="@+id/clipboard_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp">
+
+        <ImageButton
+            android:id="@+id/clipboard_back_button"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:contentDescription="@string/abc_action_bar_up_description"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:id="@+id/clipboard_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="8dp"
+            android:text="@string/clipboard"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/clipboard_clear_button"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:contentDescription="@string/clear_clipboard" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/clipboard_tip_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="6dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="8dp"
+        android:paddingVertical="8dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/clipboard_tip_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clipboard_tip_welcome_title"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/clipboard_tip_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/clipboard_tip_welcome_desc"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/clipboard_tip_close"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/dialog_close"
+            android:src="@drawable/ic_close"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/clipboard_empty_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:text="¯\\_(ツ)_/¯"
+            tools:ignore="HardcodedText" />
+
+        <helium314.keyboard.keyboard.clipboard.ClipboardHistoryRecyclerView
+            android:id="@+id/clipboard_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"/>
+
+        <LinearLayout
+            android:id="@+id/clipboard_undo_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingStart="16dp"
+            android:paddingEnd="6dp"
+            android:paddingVertical="5dp"
+            android:elevation="6dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/clipboard_undo_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clipboard_clip_deleted"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/clipboard_undo_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="7dp"
+                android:gravity="center"
+                android:text="@string/undo"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <helium314.keyboard.keyboard.MainKeyboardView
+        android:id="@+id/bottom_row_keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</helium314.keyboard.keyboard.clipboard.ClipboardHistoryView>

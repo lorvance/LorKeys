@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/translate_bar_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="6dp"
+    android:paddingEnd="6dp"
+    android:paddingTop="3dp"
+    android:paddingBottom="4dp">
+
+    <!-- Row 1: Back (<), Source Lang Pill, Swap (⇄), Target Lang Pill -->
+    <LinearLayout
+        android:id="@+id/translate_bar_top_row"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_tb_close"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/spoken_description_return"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:id="@+id/btn_tb_src_lang"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="13sp"
+            android:textStyle="normal"
+            android:text="Русский ▾" />
+
+        <ImageButton
+            android:id="@+id/btn_tb_swap"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Swap"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_horizontal" />
+
+        <TextView
+            android:id="@+id/btn_tb_target_lang"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="13sp"
+            android:textStyle="normal"
+            android:text="Английский ▾" />
+    </LinearLayout>
+
+    <!-- Row 2: Capsule text input [ привет|             ✕ ] -->
+    <LinearLayout
+        android:id="@+id/translate_bar_input_row"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingEnd="6dp">
+
+        <HorizontalScrollView
+            android:id="@+id/hsv_tb_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scrollbars="none"
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/tv_tb_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="none"
+                android:textSize="14sp"
+                android:hint="@string/translate_input_hint" />
+        </HorizontalScrollView>
+
+        <ProgressBar
+            android:id="@+id/pb_tb_loading"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="4dp"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/btn_tb_clear"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Clear"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_close"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

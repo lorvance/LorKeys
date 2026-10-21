@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/translate_view_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="6dp">
+
+    <!-- Top control row: Back, Source Lang, Swap, Target Lang, Clear -->
+    <LinearLayout
+        android:id="@+id/translate_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_translate_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/spoken_description_return"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:id="@+id/btn_source_lang"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="2dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/translate_auto" />
+
+        <ImageButton
+            android:id="@+id/btn_swap_lang"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Swap"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_horizontal" />
+
+        <TextView
+            android:id="@+id/btn_target_lang"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight="1"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="4dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="English" />
+
+        <ImageButton
+            android:id="@+id/btn_clear_input"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Clear"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_close" />
+    </LinearLayout>
+
+    <!-- Quick language selection chips -->
+    <HorizontalScrollView
+        android:id="@+id/translate_chips_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:scrollbars="none"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="4dp">
+
+        <LinearLayout
+            android:id="@+id/translate_chips_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
+    <!-- Main translate card with input and output -->
+    <LinearLayout
+        android:id="@+id/translate_card_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/et_translate_input"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="top|start"
+            android:hint="@string/translate_input_hint"
+            android:textSize="14sp"
+            android:inputType="textMultiLine|textCapSentences"
+            android:scrollbars="vertical" />
+
+        <View
+            android:id="@+id/translate_inner_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="#20808080" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_translate_output"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top|start"
+                android:textIsSelectable="true"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <ProgressBar
+                android:id="@+id/pb_translate_loading"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!-- Bottom action buttons: Insert & Copy -->
+    <LinearLayout
+        android:id="@+id/translate_bottom_actions"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:gravity="end|center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp">
+
+        <Button
+            android:id="@+id/btn_translate_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:text="@string/translate_copy" />
+
+        <Button
+            android:id="@+id/btn_translate_insert"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:text="@string/translate_insert" />
+    </LinearLayout>
+
+</LinearLayout>
