@@ -736,7 +736,7 @@
 
     <string name="prefs_keypress_sound_preset">Звук клавиш</string>
     <string name="sound_preset_default">Классический (Android)</string>
-    <string name="sound_preset_ios">iOS</string>
+    <string name="sound_preset_ios">LorKeys</string>
     <string name="pref_inline_calculator">Встроенный калькулятор</string>
     <string name="pref_inline_calculator_summary">Вычисляет математические выражения в подсказках (например, 15+25=)</string>
     <string name="settings_screen_languages">Языки</string>
@@ -754,4 +754,24 @@
     <string name="pref_emoji_font_preset_title">Шрифт эмодзи</string>
     <string name="emoji_preset_stock">Системный (по умолчанию)</string>
     <string name="emoji_preset_ios">iOS (Apple Color Emoji)</string>
+    <string name="telegram_channel_banner_title">Telegram-канал разработчика</string>
+    <string name="telegram_channel_banner_desc">Подпишитесь на @devlorvance, чтобы первыми узнавать о новых версиях и фичах</string>
+
+    <string name="clipboard_tips_section_header">Советы</string>
+    <string name="clipboard_tip_gboard_welcome">Знакомьтесь с клавиатурой LorKeys! Здесь будет сохраняться текст, который вы копируете.</string>
+    <string name="clipboard_tip_gboard_paste">Нажмите на фрагмент, чтобы вставить его в текстовое поле.</string>
+    <string name="clipboard_tip_gboard_edit">Чтобы закреплять, добавлять или удалять фрагменты, используйте значок редактирования.</string>
+    <string name="clipboard_tip_gboard_pin">Чтобы закрепить фрагмент, нажмите на него и удерживайте. Незакрепленные объекты будут удалены через час.</string>
+
+    <string name="pref_snap_keyboard_to_cursor">Подгонять клавиатуру под высоту строки</string>
+    <string name="pref_snap_keyboard_to_cursor_summary">Клавиатура поднимается к редактируемой строке, если поле ввода находится выше</string>
+
+    <string name="update_available_title">Доступно обновление LorKeys %s!</string>
+    <string name="update_action_download">Скачать апдейт</string>
+    <string name="update_action_later">Напомнить позже</string>
+    <string name="update_downloading">Скачивание обновления…</string>
+    <string name="update_check_title">Проверить обновления</string>
+    <string name="update_check_desc">Проверить наличие новой версии LorKeys на GitHub</string>
+    <string name="update_no_updates">У вас установлена актуальная версия LorKeys (%s)</string>
+    <string name="update_error">Не удалось проверить обновления: %s</string>
 </resources>

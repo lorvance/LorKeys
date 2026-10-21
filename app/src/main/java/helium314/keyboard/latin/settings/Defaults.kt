@@ -55,7 +55,9 @@ object Defaults {
     const val PREF_VIBRATE_ON = false
     const val PREF_VIBRATE_IN_DND_MODE = false
     const val PREF_SOUND_ON = false
-    const val PREF_KEYPRESS_SOUND_PRESET = "default"
+    const val PREF_KEYPRESS_SOUND_PRESET = "ios"
+    const val PREF_SNAP_KEYBOARD_TO_CURSOR = false
+    const val PREF_TELEGRAM_BANNER_DISMISSED = false
     const val PREF_INLINE_CALCULATOR = true
     const val PREF_SUGGEST_EMOJIS = true
     const val PREF_INLINE_EMOJI_SEARCH = true

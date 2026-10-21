@@ -19,7 +19,7 @@ object AppLocaleUtils {
     const val PREF_APP_LANGUAGE = "pref_app_language"
 
     val SUPPORTED_APP_LANGUAGES = listOf(
-        AppLanguageItem("", "", ""), // Filled dynamically with stringResource(R.string.app_language_system_default)
+        AppLanguageItem("", "", ""),
         AppLanguageItem("ru", "Русский", "Russian"),
         AppLanguageItem("en", "English", "English"),
         AppLanguageItem("uk", "Українська", "Ukrainian"),
@@ -32,6 +32,7 @@ object AppLocaleUtils {
         AppLanguageItem("pl", "Polski", "Polish"),
         AppLanguageItem("tr", "Türkçe", "Turkish"),
         AppLanguageItem("kk", "Қазақ тілі", "Kazakh"),
+        AppLanguageItem("vi", "Tiếng Việt", "Vietnamese"),
     )
 
     fun getSavedLanguageTag(context: Context): String {

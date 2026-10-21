@@ -2208,4 +2208,42 @@ public final class KeyboardSwitcher implements KeyboardState.SwitchActions {
     public LatinIME getLatinIME() {
         return mLatinIME;
     }
+
+    public void snapKeyboardToCursor(final android.view.inputmethod.CursorAnchorInfo cursorAnchorInfo) {
+        if (mCurrentInputView == null || cursorAnchorInfo == null) return;
+        final android.graphics.Matrix matrix = cursorAnchorInfo.getMatrix();
+        if (matrix == null) return;
+        final float[] points = new float[]{cursorAnchorInfo.getInsertionMarkerHorizontal(), cursorAnchorInfo.getInsertionMarkerBottom()};
+        matrix.mapPoints(points);
+        final float cursorBottomY = points[1];
+        if (Float.isNaN(cursorBottomY) || cursorBottomY <= 0) return;
+
+        final int[] loc = new int[2];
+        mCurrentInputView.getLocationOnScreen(loc);
+        final float baseTop = loc[1] - mCurrentInputView.getTranslationY();
+
+        float targetOffset = 0f;
+        if (cursorBottomY < baseTop) {
+            targetOffset = cursorBottomY - baseTop;
+            final float maxLift = -baseTop + 50f;
+            if (targetOffset < maxLift) {
+                targetOffset = maxLift;
+            }
+        }
+        mCurrentInputView.animate().translationY(targetOffset).setDuration(120).withEndAction(() -> {
+            if (mLatinIME != null) {
+                final android.view.Window win = mLatinIME.getWindow() != null ? mLatinIME.getWindow().getWindow() : null;
+                if (win != null && win.getDecorView() != null) {
+                    win.getDecorView().requestApplyInsets();
+                }
+            }
+        }).start();
+    }
+
+    public void resetKeyboardPosition() {
+        if (mCurrentInputView != null) {
+            mCurrentInputView.animate().cancel();
+            mCurrentInputView.setTranslationY(0f);
+        }
+    }
 }

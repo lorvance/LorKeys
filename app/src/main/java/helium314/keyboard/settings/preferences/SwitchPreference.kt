@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: GPL-3.0-only
 package helium314.keyboard.settings.preferences
 
 import androidx.compose.runtime.Composable
@@ -28,6 +27,7 @@ fun SwitchPreference(
     setting: Setting,
     default: Boolean,
     allowCheckedChange: (Boolean) -> Boolean = { true },
+    badge: @Composable (() -> Unit)? = null,
     onCheckedChange: (Boolean) -> Unit = { }
 ) {
     SwitchPreference(
@@ -35,6 +35,7 @@ fun SwitchPreference(
         description = setting.description,
         key = setting.key,
         default = default,
+        badge = badge,
         allowCheckedChange = allowCheckedChange,
         onCheckedChange = onCheckedChange
     )
@@ -47,7 +48,8 @@ fun SwitchPreference(
     key: String,
     default: Boolean,
     description: String? = null,
-    allowCheckedChange: (Boolean) -> Boolean = { true }, // true means ok, usually for showing some dialog
+    badge: @Composable (() -> Unit)? = null,
+    allowCheckedChange: (Boolean) -> Boolean = { true },
     onCheckedChange: (Boolean) -> Unit = { },
 ) {
     val ctx = LocalContext.current
@@ -69,7 +71,8 @@ fun SwitchPreference(
         name = name,
         onClick = { switched(!value) },
         modifier = modifier,
-        description = description
+        description = description,
+        badge = badge
     ) {
         SettingsSwitch(
             checked = value,
@@ -85,7 +88,6 @@ fun SwitchPreferenceWithEmojiDictWarning(setting: Setting, default: Boolean) {
     val hasEmojiDict = DictionaryInfoUtils.getLocalesWithEmojiDicts(context).isNotEmpty()
     SwitchPreference(setting, default && hasEmojiDict) { showWarningDialog = it && !hasEmojiDict }
     if (showWarningDialog) {
-        // emoji_dictionary_required contains "%s" since we didn't supply a formatArg
         val link = stringResource(R.string.dictionary_link_text).withHtmlLink(Links.DICTIONARY_URL + Links.DICTIONARY_DOWNLOAD_SUFFIX.replace("raw", "src")
             + Links.DICTIONARY_EMOJI_CLDR_SUFFIX)
         val message = stringResource(R.string.emoji_dictionary_required, link)

@@ -632,7 +632,7 @@
     <string name="go_back">Назад</string>
     <string name="prefs_keypress_sound_preset">Звук клавіш</string>
     <string name="sound_preset_default">Класичний (Android)</string>
-    <string name="sound_preset_ios">iOS</string>
+    <string name="sound_preset_ios">LorKeys</string>
     <string name="pref_inline_calculator">Вбудований калькулятор</string>
     <string name="pref_inline_calculator_summary">Обчислює математичні вирази в підказках (наприклад, 15+25=)</string>
     <string name="settings_screen_languages">Мови</string>

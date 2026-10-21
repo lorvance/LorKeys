@@ -191,17 +191,14 @@ class ClipboardHistoryView @JvmOverloads constructor(
     }
 
     private fun setupTipCard(colors: Colors) {
-        val tipCard = findViewById<LinearLayout>(R.id.clipboard_tip_card) ?: return
-        val tipTitle = findViewById<TextView>(R.id.clipboard_tip_title)
-        val tipDesc = findViewById<TextView>(R.id.clipboard_tip_description)
-        val tipClose = findViewById<ImageButton>(R.id.clipboard_tip_close)
+        val tipsSection = findViewById<LinearLayout>(R.id.clipboard_tips_section) ?: return
         val showTips = context.prefs().getBoolean(Settings.PREF_CLIPBOARD_SHOW_TIPS, Defaults.PREF_CLIPBOARD_SHOW_TIPS)
         if (!showTips) {
-            tipCard.visibility = View.GONE
+            tipsSection.visibility = View.GONE
             return
         }
 
-        tipCard.visibility = View.VISIBLE
+        tipsSection.visibility = View.VISIBLE
         val isDark = KeyboardTheme.isDarkThemeActive(context)
         val funcBg = colors.get(ColorType.FUNCTIONAL_KEY_BACKGROUND)
         val cardBgColor = if (isDark) {
@@ -209,25 +206,47 @@ class ClipboardHistoryView @JvmOverloads constructor(
         } else {
             if (!isDarkColor(funcBg)) ColorUtils.blendARGB(funcBg, Color.BLACK, 0.08f) else 0xFFE9EAEC.toInt()
         }
+        val iconBadgeBgColor = if (isDark) ColorUtils.blendARGB(cardBgColor, Color.WHITE, 0.15f) else ColorUtils.blendARGB(cardBgColor, Color.BLACK, 0.12f)
         val cardBorder = colors.get(ColorType.SPECIAL_KEY_BACKGROUND)
-        val bgDrawable = GradientDrawable().apply {
-            shape = GradientDrawable.RECTANGLE
-            cornerRadius = 14.dpToPx(resources).toFloat()
-            setColor(cardBgColor)
-            setStroke(1.dpToPx(resources).toInt(), ColorUtils.setAlphaComponent(cardBorder, 0x88))
-        }
-        tipCard.background = bgDrawable
 
-        tipTitle?.setTextColor(if (isDark) Color.WHITE else Color.BLACK)
-        tipDesc?.setTextColor(if (isDark) ColorUtils.setAlphaComponent(Color.WHITE, 0xCC) else ColorUtils.setAlphaComponent(Color.BLACK, 0xAA))
-        tipClose?.setColorFilter(if (isDark) Color.WHITE else Color.BLACK)
-        tipClose?.setOnClickListener {
+        val tipsTitle = findViewById<TextView>(R.id.clipboard_tips_title)
+        val tipsClose = findViewById<ImageButton>(R.id.clipboard_tips_close)
+        tipsTitle?.setTextColor(if (isDark) ColorUtils.setAlphaComponent(Color.WHITE, 0x99) else ColorUtils.setAlphaComponent(Color.BLACK, 0x88))
+        tipsClose?.setColorFilter(if (isDark) Color.WHITE else Color.BLACK)
+        tipsClose?.setOnClickListener {
             AudioAndHapticFeedbackManager.getInstance().performHapticAndAudioFeedback(KeyCode.NOT_SPECIFIED, it, HapticEvent.KEY_PRESS)
-            tipCard.visibility = View.GONE
+            tipsSection.visibility = View.GONE
             context.prefs().edit().putBoolean(Settings.PREF_CLIPBOARD_SHOW_TIPS, false).apply()
         }
-        if (tipTitle != null) KeyboardTypeface.applyToTextView(tipTitle)
-        if (tipDesc != null) KeyboardTypeface.applyToTextView(tipDesc)
+
+        val cards = listOf(
+            Pair(findViewById<LinearLayout>(R.id.clipboard_tip_card_1), Pair(findViewById<ImageView>(R.id.clipboard_tip_icon_1), findViewById<TextView>(R.id.clipboard_tip_text_1))),
+            Pair(findViewById<LinearLayout>(R.id.clipboard_tip_card_2), Pair(findViewById<ImageView>(R.id.clipboard_tip_icon_2), findViewById<TextView>(R.id.clipboard_tip_text_2))),
+            Pair(findViewById<LinearLayout>(R.id.clipboard_tip_card_3), Pair(findViewById<ImageView>(R.id.clipboard_tip_icon_3), findViewById<TextView>(R.id.clipboard_tip_text_3))),
+            Pair(findViewById<LinearLayout>(R.id.clipboard_tip_card_4), Pair(findViewById<ImageView>(R.id.clipboard_tip_icon_4), findViewById<TextView>(R.id.clipboard_tip_text_4)))
+        )
+
+        for ((card, iconAndText) in cards) {
+            val (iconView, textView) = iconAndText
+            val bgDrawable = GradientDrawable().apply {
+                shape = GradientDrawable.RECTANGLE
+                cornerRadius = 14.dpToPx(resources).toFloat()
+                setColor(cardBgColor)
+                setStroke(1.dpToPx(resources).toInt(), ColorUtils.setAlphaComponent(cardBorder, 0x66))
+            }
+            card?.background = bgDrawable
+
+            val iconBadge = GradientDrawable().apply {
+                shape = GradientDrawable.OVAL
+                setColor(iconBadgeBgColor)
+            }
+            iconView?.background = iconBadge
+            iconView?.setColorFilter(if (isDark) Color.WHITE else Color.BLACK)
+
+            textView?.setTextColor(if (isDark) Color.WHITE else Color.BLACK)
+            if (textView != null) KeyboardTypeface.applyToTextView(textView)
+        }
+        if (tipsTitle != null) KeyboardTypeface.applyToTextView(tipsTitle)
     }
 
     private fun setupHeader(colors: Colors) {

@@ -117,13 +117,15 @@ fun SearchSettingsScreen(
     settings: List<Any?>,
     hideTopSearchBar: Boolean = false,
     showBackButton: Boolean = true,
+    menu: List<Pair<String, () -> Unit>>? = null,
     filteredItems: ((String) -> List<Setting>)? = null,
-    content: @Composable (ColumnScope.() -> Unit)? = null // overrides settings if not null
+    content: @Composable (ColumnScope.() -> Unit)? = null
 ) {
     SearchScreen(
         onClickBack = onClickBack,
         hideTopSearchBar = hideTopSearchBar,
         showBackButton = showBackButton,
+        menu = menu,
         title = { Text(title, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) },
         content = content ?: {
             settings.forEach {

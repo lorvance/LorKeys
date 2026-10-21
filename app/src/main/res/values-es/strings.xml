@@ -625,7 +625,7 @@
     <string name="go_back">Atrás</string>
     <string name="prefs_keypress_sound_preset">Sonido de pulsación</string>
     <string name="sound_preset_default">Clásico (Android)</string>
-    <string name="sound_preset_ios">iOS</string>
+    <string name="sound_preset_ios">LorKeys</string>
     <string name="pref_inline_calculator">Calculadora integrada</string>
     <string name="pref_inline_calculator_summary">Calcula expresiones matemáticas en sugerencias (ej. 15+25=)</string>
     <string name="settings_screen_languages">Idiomas</string>

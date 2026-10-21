@@ -168,6 +168,8 @@ public final class Settings implements SharedPreferences.OnSharedPreferenceChang
     public static final String PREF_KEYPRESS_SOUND_PRESET = "keypress_sound_preset";
     public static final String SOUND_PRESET_DEFAULT = "default";
     public static final String SOUND_PRESET_IOS = "ios";
+    public static final String PREF_SNAP_KEYBOARD_TO_CURSOR = "pref_snap_keyboard_to_cursor";
+    public static final String PREF_TELEGRAM_BANNER_DISMISSED = "pref_telegram_banner_dismissed";
     public static final String PREF_INLINE_CALCULATOR = "inline_calculator";
     public static final String PREF_KEY_LONGPRESS_TIMEOUT = "key_longpress_timeout";
     public static final String PREF_ENABLE_EMOJI_ALT_PHYSICAL_KEY = "enable_emoji_alt_physical_key";

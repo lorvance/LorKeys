@@ -1361,7 +1361,7 @@ New dictionary:
 
     <string name="prefs_keypress_sound_preset">Keypress sound preset</string>
     <string name="sound_preset_default">Classic (Android)</string>
-    <string name="sound_preset_ios">iOS</string>
+    <string name="sound_preset_ios">LorKeys</string>
     <string name="pref_inline_calculator">Inline calculator</string>
     <string name="pref_inline_calculator_summary">Calculates math expressions in suggestions (e.g. 15+25=)</string>
     <string name="settings_screen_languages">Languages</string>
@@ -1379,4 +1379,24 @@ New dictionary:
     <string name="pref_emoji_font_preset_title">Emoji font</string>
     <string name="emoji_preset_stock">System (default)</string>
     <string name="emoji_preset_ios">iOS (Apple Color Emoji)</string>
+    <string name="telegram_channel_banner_title">Developer\'s Telegram</string>
+    <string name="telegram_channel_banner_desc">Subscribe to @devlorvance for latest LorKeys news, updates, and sneak peeks</string>
+
+    <string name="clipboard_tips_section_header">Tips</string>
+    <string name="clipboard_tip_gboard_welcome">Meet LorKeys clipboard! Text you copy will be saved here.</string>
+    <string name="clipboard_tip_gboard_paste">Tap a clip to paste it into the text field.</string>
+    <string name="clipboard_tip_gboard_edit">Use the edit icon to pin, add, or delete clips.</string>
+    <string name="clipboard_tip_gboard_pin">Touch and hold a clip to pin it. Unpinned clips will be deleted after 1 hour.</string>
+
+    <string name="pref_snap_keyboard_to_cursor">Snap keyboard to cursor line</string>
+    <string name="pref_snap_keyboard_to_cursor_summary">Lifts keyboard up to the active input line if it is positioned higher</string>
+
+    <string name="update_available_title">LorKeys %s update available!</string>
+    <string name="update_action_download">Download update</string>
+    <string name="update_action_later">Remind later</string>
+    <string name="update_downloading">Downloading update…</string>
+    <string name="update_check_title">Check for updates</string>
+    <string name="update_check_desc">Check for new LorKeys releases on GitHub</string>
+    <string name="update_no_updates">You have the latest version of LorKeys (%s)</string>
+    <string name="update_error">Failed to check for updates: %s</string>
 </resources>

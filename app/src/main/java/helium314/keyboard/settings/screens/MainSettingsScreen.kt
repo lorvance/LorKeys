@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: GPL-3.0-only
 @file:OptIn(androidx.compose.ui.text.ExperimentalTextApi::class)
 package helium314.keyboard.settings.screens
 import helium314.keyboard.settings.LocalSearchState
@@ -98,6 +97,15 @@ import helium314.keyboard.latin.utils.prefs
 import helium314.keyboard.latin.utils.Log
 import helium314.keyboard.settings.SearchSettingsScreen
 import helium314.keyboard.settings.SettingsActivity
+import androidx.compose.foundation.shape.CircleShape
+import androidx.core.content.edit
+import helium314.keyboard.latin.settings.Defaults
+import helium314.keyboard.latin.settings.Settings
+import helium314.keyboard.settings.dialogs.InfoDialog
+import helium314.keyboard.settings.preferences.backupLauncher
+import helium314.keyboard.settings.preferences.restoreLauncher
+import helium314.keyboard.settings.preferences.createBackupIntent
+import helium314.keyboard.settings.preferences.createRestoreIntent
 import helium314.keyboard.latin.utils.Theme
 import helium314.keyboard.settings.initPreview
 import helium314.keyboard.settings.preferences.Preference
@@ -125,13 +133,68 @@ fun MainSettingsScreen(
     onClickWelcomeWizard: () -> Unit,
     onClickBack: () -> Unit,
 ) {
+    val ctx = LocalContext.current
+    var backupError: String? by rememberSaveable { mutableStateOf(null) }
+    val backupLauncher = backupLauncher { backupError = it }
+    val restoreLauncher = restoreLauncher { backupError = it }
+    var updateInfoToDisplay by remember { mutableStateOf<helium314.keyboard.settings.updater.UpdateInfo?>(null) }
+
+    androidx.compose.runtime.LaunchedEffect(Unit) {
+        val lastCheck = ctx.prefs().getLong("last_update_check_time", 0L)
+        val now = System.currentTimeMillis()
+        if (now - lastCheck > 1000L * 60L * 60L * 2L) {
+            ctx.prefs().edit { putLong("last_update_check_time", now) }
+            helium314.keyboard.settings.updater.UpdateManager.checkForUpdate(ctx, isManual = false) { info ->
+                updateInfoToDisplay = info
+            }
+        }
+    }
+
     SearchSettingsScreen(
         onClickBack = onClickBack,
         title = stringResource(R.string.ime_settings),
         settings = emptyList(),
         showBackButton = false,
+        menu = listOf(
+            stringResource(R.string.backup_create_action) to {
+                backupLauncher.launch(createBackupIntent())
+            },
+            stringResource(R.string.backup_restore_action) to {
+                restoreLauncher.launch(createRestoreIntent())
+            }
+        )
     ) {
-        val ctx = LocalContext.current
+        if (updateInfoToDisplay != null) {
+            helium314.keyboard.settings.updater.UpdateDialog(
+                updateInfo = updateInfoToDisplay!!,
+                onDismissRequest = { updateInfoToDisplay = null }
+            )
+        }
+
+        if (backupError != null) {
+            InfoDialog(
+                if (backupError!!.startsWith("b"))
+                    stringResource(R.string.backup_error, backupError!!.drop(1))
+                else stringResource(R.string.restore_error, backupError!!.drop(1))
+            ) { backupError = null }
+        }
+
+        var showTelegramBanner by remember {
+            mutableStateOf(!ctx.prefs().getBoolean(Settings.PREF_TELEGRAM_BANNER_DISMISSED, Defaults.PREF_TELEGRAM_BANNER_DISMISSED))
+        }
+        if (showTelegramBanner) {
+            TelegramChannelBanner(
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/devlorvance"))
+                    ctx.startActivity(intent)
+                },
+                onDismiss = {
+                    showTelegramBanner = false
+                    ctx.prefs().edit { putBoolean(Settings.PREF_TELEGRAM_BANNER_DISMISSED, true) }
+                }
+            )
+        }
+
         val b = (ctx.getActivity() as? SettingsActivity)?.prefChanged?.collectAsState()
 
         val enabledSubtypes = remember(b?.value) { SubtypeSettings.getEnabledSubtypes(true) }
@@ -403,11 +466,7 @@ private fun QuickSetupCard(
             val isSwipingLeft = offsetX.value < 0
             val alignment = if (isSwipingLeft) Alignment.CenterEnd else Alignment.CenterStart
             val revealWidth = with(LocalDensity.current) { absoluteOffset.toDp() }
-            // To ensure no gap between the cards, we can stretch the reveal card slightly wider
             val extraOverlap = 20.dp
-            
-            // Dynamic corner radius: starts as pill (height/2), then blends to match card corners (12dp) on the inner edge
-            // Material Card default corner radius is typically 12dp.
             Box(
                 modifier = Modifier
                     .matchParentSize()
@@ -628,6 +687,67 @@ private fun QuickSetupStep(
                 fontSize = 20.sp,
                 color = MaterialTheme.colorScheme.secondary
             )
+        }
+    }
+}
+
+@Composable
+fun TelegramChannelBanner(
+    onClick: () -> Unit,
+    onDismiss: () -> Unit,
+) {
+    Card(
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 6.dp)
+            .clickable { onClick() }
+    ) {
+        Row(
+            modifier = Modifier.padding(14.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .size(40.dp)
+                    .background(MaterialTheme.colorScheme.primary, CircleShape)
+            ) {
+                Text(
+                    text = "send",
+                    fontFamily = materialSymbols,
+                    fontSize = 20.sp,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+            }
+            Spacer(modifier = Modifier.width(12.dp))
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = stringResource(R.string.telegram_channel_banner_title),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+                Text(
+                    text = stringResource(R.string.telegram_channel_banner_desc),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.85f)
+                )
+            }
+            IconButton(
+                onClick = onDismiss,
+                modifier = Modifier.size(32.dp)
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_close),
+                    contentDescription = stringResource(R.string.dialog_close),
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    modifier = Modifier.size(18.dp)
+                )
+            }
         }
     }
 }

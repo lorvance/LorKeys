@@ -159,6 +159,7 @@ public class SettingsValues {
     public final int mKeypressVibrationDuration;
     public final float mKeypressSoundVolume;
     public final String mKeypressSoundPreset;
+    public final boolean mSnapKeyboardToCursor;
     public final boolean mInlineCalculator;
     public final boolean mAutoCorrectionEnabledPerUserSettings;
     public final boolean mAutoCorrectEnabled;
@@ -256,6 +257,7 @@ public class SettingsValues {
         mKeypressVibrationDuration = prefs.getInt(Settings.PREF_VIBRATION_DURATION_SETTINGS, Defaults.PREF_VIBRATION_DURATION_SETTINGS);
         mKeypressSoundVolume = prefs.getFloat(Settings.PREF_KEYPRESS_SOUND_VOLUME, Defaults.PREF_KEYPRESS_SOUND_VOLUME);
         mKeypressSoundPreset = prefs.getString(Settings.PREF_KEYPRESS_SOUND_PRESET, Defaults.PREF_KEYPRESS_SOUND_PRESET);
+        mSnapKeyboardToCursor = prefs.getBoolean(Settings.PREF_SNAP_KEYBOARD_TO_CURSOR, Defaults.PREF_SNAP_KEYBOARD_TO_CURSOR);
         mInlineCalculator = prefs.getBoolean(Settings.PREF_INLINE_CALCULATOR, Defaults.PREF_INLINE_CALCULATOR);
         mEnableEmojiAltPhysicalKey = prefs.getBoolean(Settings.PREF_ENABLE_EMOJI_ALT_PHYSICAL_KEY, Defaults.PREF_ENABLE_EMOJI_ALT_PHYSICAL_KEY);
         mGestureInputEnabled = JniUtils.sHaveGestureLib && prefs.getBoolean(Settings.PREF_GESTURE_INPUT, Defaults.PREF_GESTURE_INPUT);

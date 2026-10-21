@@ -229,4 +229,65 @@
     <string name="prefs_space_bar_text">Tuỳ chỉnh chữ cho phím khoảng cách</string>
     <string name="suggest_emojis_summary">Sử dụng từ điển biểu tượng cảm xúc trong chế độ gợi ý thường</string>
     <string name="center_suggestion_text_to_enter_summary">Khi nhấn giữ phím khoảng cách hoặc dấu câu, gợi ý ở giữa sẽ được nhập vào</string>
+    <string name="english_ime_name">LorKeys</string>
+    <string name="settings_screen_appearance">Giao diện</string>
+    <string name="cloud_features">Tính năng đám mây</string>
+    <string name="settings_screen_languages">Ngôn ngữ</string>
+    <string name="settings_desc_languages">Tất cả các ngôn ngữ nhập và bố cục có sẵn</string>
+    <string name="settings_desc_preferences">Phản hồi phím, nhập liệu, bố cục</string>
+    <string name="settings_desc_appearance">Chủ đề, phông chữ, biểu tượng cảm xúc, bo góc</string>
+    <string name="settings_desc_toolbar">Tùy chỉnh các nút trên thanh công cụ</string>
+    <string name="settings_desc_cloud">Khóa API, tính năng trực tuyến</string>
+    <string name="settings_desc_about">Phiên bản, giấy phép, cập nhật</string>
+
+    <string name="prefs_keypress_sound_preset">Kiểu âm thanh khi gõ</string>
+    <string name="sound_preset_default">Cổ điển (Android)</string>
+    <string name="sound_preset_ios">LorKeys</string>
+    <string name="pref_inline_calculator">Máy tính nhanh</string>
+    <string name="pref_inline_calculator_summary">Tính toán biểu thức toán học trực tiếp trong gợi ý</string>
+    <string name="prefs_keyboard_top_corner_radius">Bán kính bo góc trên</string>
+    <string name="prefs_keyboard_bottom_corner_radius">Bán kính bo góc dưới</string>
+    <string name="app_language_title">Ngôn ngữ ứng dụng</string>
+    <string name="app_language_desc">Chọn ngôn ngữ hiển thị cho cài đặt LorKeys</string>
+    <string name="app_language_system_default">Mặc định hệ thống</string>
+    <string name="round_keyboard_title">Bàn phím tròn</string>
+    <string name="round_keyboard_summary">Tính năng vui nhộn: làm bàn phím hoàn toàn tròn</string>
+    <string name="pref_font_preset_title">Phông chữ bàn phím</string>
+    <string name="font_preset_stock">Hệ thống (mặc định)</string>
+    <string name="font_preset_ios">iOS (SF Pro)</string>
+    <string name="pref_emoji_font_preset_title">Phông chữ biểu tượng cảm xúc</string>
+    <string name="emoji_preset_stock">Hệ thống (mặc định)</string>
+    <string name="emoji_preset_ios">iOS (Apple Color Emoji)</string>
+
+    <string name="theme_name_oled_dark">OLED Dark</string>
+    <string name="backup_create_action">Tạo bản sao lưu (.lorkeys)</string>
+    <string name="backup_create_description">Lưu cài đặt bàn phím vào tệp .lorkeys</string>
+    <string name="backup_restore_action">Khôi phục bản sao lưu (.lorkeys)</string>
+    <string name="backup_restore_description">Mở tệp .lorkeys để khôi phục cài đặt</string>
+
+    <string name="voice_input_listening">Đang lắng nghe…</string>
+    <string name="voice_input_processing">Đang nhận diện giọng nói…</string>
+
+    <string name="clipboard_tips_section_header">Lời khuyên</string>
+    <string name="clipboard_tip_gboard_welcome">Chào mừng bạn đến với khay nhớ tạm LorKeys! Văn bản bạn sao chép sẽ được lưu tại đây.</string>
+    <string name="clipboard_tip_gboard_paste">Nhấn vào một đoạn để dán vào trường văn bản.</string>
+    <string name="clipboard_tip_gboard_edit">Sử dụng biểu tượng chỉnh sửa để ghim, thêm hoặc xóa đoạn.</string>
+    <string name="clipboard_tip_gboard_pin">Chạm và giữ đoạn để ghim. Các mục chưa ghim sẽ bị xóa sau 1 giờ.</string>
+    <string name="clipboard_show_tips_title">Gợi ý khay nhớ tạm</string>
+    <string name="clipboard_show_tips_summary">Hiển thị các thẻ gợi ý hữu ích trong khay nhớ tạm</string>
+
+    <string name="telegram_channel_banner_title">Kênh Telegram của nhà phát triển</string>
+    <string name="telegram_channel_banner_desc">Đăng ký @devlorvance để cập nhật tin tức và tính năng mới nhất của LorKeys</string>
+
+    <string name="pref_snap_keyboard_to_cursor">Căn chỉnh bàn phím theo dòng con trỏ</string>
+    <string name="pref_snap_keyboard_to_cursor_summary">Nâng bàn phím lên gần dòng nhập đang hoạt động nếu dòng ở vị trí cao hơn</string>
+
+    <string name="update_available_title">Đã có bản cập nhật LorKeys %s!</string>
+    <string name="update_action_download">Tải xuống bản cập nhật</string>
+    <string name="update_action_later">Nhắc tôi sau</string>
+    <string name="update_downloading">Đang tải xuống bản cập nhật…</string>
+    <string name="update_check_title">Kiểm tra cập nhật</string>
+    <string name="update_check_desc">Kiểm tra các phiên bản LorKeys mới trên GitHub</string>
+    <string name="update_no_updates">Bạn đang sử dụng phiên bản LorKeys mới nhất (%s)</string>
+    <string name="update_error">Không thể kiểm tra cập nhật: %s</string>
 </resources>

@@ -52,6 +52,23 @@ import androidx.core.content.edit
 import helium314.keyboard.latin.checkVersionUpgrade
 import helium314.keyboard.latin.transferOldPinnedClips
 
+import androidx.compose.foundation.layout.Column
+
+fun createBackupIntent(): Intent {
+    val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
+    return Intent(Intent.ACTION_CREATE_DOCUMENT)
+        .addCategory(Intent.CATEGORY_OPENABLE)
+        .putExtra(Intent.EXTRA_TITLE, "LorKeys_backup_$currentDate.lorkeys")
+        .setType("*/*")
+}
+
+fun createRestoreIntent(): Intent {
+    return Intent(Intent.ACTION_OPEN_DOCUMENT)
+        .addCategory(Intent.CATEGORY_OPENABLE)
+        .setType("*/*")
+        .putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("*/*", "application/zip", "application/octet-stream"))
+}
+
 @Composable
 fun BackupRestorePreference(setting: Setting) {
     val ctx = LocalContext.current
@@ -59,33 +76,23 @@ fun BackupRestorePreference(setting: Setting) {
     val backupLauncher = backupLauncher { error = it }
     val restoreLauncher = restoreLauncher { error = it }
 
-    Preference(
-        name = stringResource(R.string.backup_create_action),
-        description = stringResource(R.string.backup_create_description),
-        onClick = {
-            val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
-            val intent = Intent(Intent.ACTION_CREATE_DOCUMENT)
-                .addCategory(Intent.CATEGORY_OPENABLE)
-                .putExtra(
-                    Intent.EXTRA_TITLE,
-                    "LorKeys_backup_$currentDate.lorkeys"
-                )
-                .setType("*/*")
-            backupLauncher.launch(intent)
-        }
-    )
+    Column {
+        Preference(
+            name = stringResource(R.string.backup_create_action),
+            description = stringResource(R.string.backup_create_description),
+            onClick = {
+                backupLauncher.launch(createBackupIntent())
+            }
+        )
 
-    Preference(
-        name = stringResource(R.string.backup_restore_action),
-        description = stringResource(R.string.backup_restore_description),
-        onClick = {
-            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-                .addCategory(Intent.CATEGORY_OPENABLE)
-                .setType("*/*")
-                .putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("*/*", "application/zip", "application/octet-stream"))
-            restoreLauncher.launch(intent)
-        }
-    )
+        Preference(
+            name = stringResource(R.string.backup_restore_action),
+            description = stringResource(R.string.backup_restore_description),
+            onClick = {
+                restoreLauncher.launch(createRestoreIntent())
+            }
+        )
+    }
     if (error != null) {
         InfoDialog(
             if (error!!.startsWith("b"))
@@ -96,7 +103,7 @@ fun BackupRestorePreference(setting: Setting) {
 }
 
 @Composable
-private fun backupLauncher(onError: (String) -> Unit): ManagedActivityResultLauncher<Intent, ActivityResult> {
+fun backupLauncher(onError: (String) -> Unit): ManagedActivityResultLauncher<Intent, ActivityResult> {
     val ctx = LocalContext.current
     return filePicker { uri ->
         // zip all files matching the backup patterns
@@ -165,7 +172,7 @@ private fun backupLauncher(onError: (String) -> Unit): ManagedActivityResultLaun
 }
 
 @Composable
-private fun restoreLauncher(onError: (String) -> Unit): ManagedActivityResultLauncher<Intent, ActivityResult> {
+fun restoreLauncher(onError: (String) -> Unit): ManagedActivityResultLauncher<Intent, ActivityResult> {
     val ctx = LocalContext.current
     return filePicker { uri ->
         val wait = CountDownLatch(1)

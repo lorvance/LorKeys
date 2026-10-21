@@ -38,8 +38,8 @@ android {
         minSdk = 23
         targetSdk = 36
         versionCode = (project.findProperty("versionCode") as? String)?.toIntOrNull()
-            ?: providers.of(GitCommitCountValueSource::class.java) {}.get().let { if (it <= 1) 3706 else it }
-        versionName = "1.17.6"
+            ?: providers.of(GitCommitCountValueSource::class.java) {}.get().let { if (it <= 1) 3800 else it }
+        versionName = "1.18.0"
         buildConfigField("String", "CONTENT_PROVIDER_AUTHORITY", "\"${applicationId}.stickercontentprovider\"")
         manifestPlaceholders["stickerAuthority"] = "${applicationId}.stickercontentprovider"
         manifestPlaceholders["stickerProviderAuthority"] = "${applicationId}.stickercontentprovider"

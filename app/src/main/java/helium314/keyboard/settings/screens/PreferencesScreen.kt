@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: GPL-3.0-only
 package helium314.keyboard.settings.screens
 
 import android.Manifest
@@ -75,6 +74,7 @@ fun PreferencesScreen(
         if (prefs.getBoolean(Settings.PREF_SOUND_ON, Defaults.PREF_SOUND_ON))
             Settings.PREF_KEYPRESS_SOUND_VOLUME else null,
         Settings.PREF_INLINE_CALCULATOR,
+        Settings.PREF_SNAP_KEYBOARD_TO_CURSOR,
         Settings.PREF_SAVE_SUBTYPE_PER_APP,
         Settings.PREF_SHOW_EMOJI_DESCRIPTIONS,
         R.string.settings_category_additional_keys,
@@ -150,6 +150,9 @@ fun createPreferencesSettings(context: Context) = listOf(
     },
     Setting(context, Settings.PREF_INLINE_CALCULATOR, R.string.pref_inline_calculator, R.string.pref_inline_calculator_summary) {
         SwitchPreference(it, Defaults.PREF_INLINE_CALCULATOR)
+    },
+    Setting(context, Settings.PREF_SNAP_KEYBOARD_TO_CURSOR, R.string.pref_snap_keyboard_to_cursor, R.string.pref_snap_keyboard_to_cursor_summary) {
+        SwitchPreference(it, Defaults.PREF_SNAP_KEYBOARD_TO_CURSOR, badge = { helium314.keyboard.settings.preferences.BetaBadge() })
     },
     Setting(context, Settings.PREF_SHOW_EMOJI_DESCRIPTIONS, R.string.show_emoji_descriptions) {
         SwitchPreferenceWithEmojiDictWarning(it, Defaults.PREF_SHOW_EMOJI_DESCRIPTIONS)
@@ -299,7 +302,6 @@ private fun screenshotClipboardPermission(): String? {
     }
 }
 
-// todo (later): not good to have it hardcoded, but reading a bunch of files may be noticeably slow
 private val localesWithLocalizedNumberRow = listOf("ar", "bn", "fa", "gu", "hi", "kn", "mr", "ne", "ur")
 
 @Preview

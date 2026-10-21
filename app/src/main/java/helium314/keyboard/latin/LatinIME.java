@@ -1306,6 +1306,16 @@ public class LatinIME extends InputMethodService implements
         switcher.updateKeyboardTheme(mDisplayContext);
         MainKeyboardView mainKeyboardView = switcher.getMainKeyboardView();
         currentSettingsValues = mSettings.getCurrent(); // settingsValues may have been reloaded
+        if (currentSettingsValues.mSnapKeyboardToCursor) {
+            final android.view.Window window = getWindow().getWindow();
+            if (window != null) {
+                window.setLayout(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT);
+            }
+            final android.view.inputmethod.InputConnection ic = getCurrentInputConnection();
+            if (ic != null) {
+                ic.requestCursorUpdates(android.view.inputmethod.InputConnection.CURSOR_UPDATE_MONITOR | android.view.inputmethod.InputConnection.CURSOR_UPDATE_IMMEDIATE);
+            }
+        }
 
         if (editorInfo == null) {
             Log.e(TAG, "Null EditorInfo in onStartInputView()");
@@ -1465,6 +1475,7 @@ public class LatinIME extends InputMethodService implements
         Log.i(TAG, "onWindowHidden");
 
         mKeyboardSwitcher.clearCachedPersistentEmojis();
+        mKeyboardSwitcher.resetKeyboardPosition();
 
         // Completely disable background blur composition, layout attributes and clear SemBlurInfo/window flags to save GPU context
         FrostedGlassHelper.configureFrostedGlass(this, mInputView, false);
@@ -1503,6 +1514,7 @@ public class LatinIME extends InputMethodService implements
     }
 
     private void cleanupInternalStateForFinishInput() {
+        mKeyboardSwitcher.resetKeyboardPosition();
         // Remove pending messages related to update suggestions
         mHandler.cancelUpdateSuggestionStrip();
         // Should do the following in onFinishInputInternal but until JB MR2 it's not
@@ -1513,6 +1525,15 @@ public class LatinIME extends InputMethodService implements
 
     protected void deallocateMemory() {
         mKeyboardSwitcher.deallocateMemory();
+    }
+
+    @Override
+    public void onUpdateCursorAnchorInfo(final android.view.inputmethod.CursorAnchorInfo cursorAnchorInfo) {
+        super.onUpdateCursorAnchorInfo(cursorAnchorInfo);
+        if (!mSettings.getCurrent().mSnapKeyboardToCursor) {
+            return;
+        }
+        mKeyboardSwitcher.snapKeyboardToCursor(cursorAnchorInfo);
     }
 
     @Override
@@ -1701,6 +1722,9 @@ public class LatinIME extends InputMethodService implements
         if (keyboardHeight == 0 && visibleKeyboardView == null) return;
 
         int visibleTopY = inputHeight - keyboardHeight - stripHeight - persistentEmojiRowHeight - translateBarHeight;
+        if (mInputView != null && mInputView.getTranslationY() != 0) {
+            visibleTopY += (int) mInputView.getTranslationY();
+        }
         if (visibleTopY < 0) visibleTopY = 0;
 
         outInsets.contentTopInsets = visibleTopY;

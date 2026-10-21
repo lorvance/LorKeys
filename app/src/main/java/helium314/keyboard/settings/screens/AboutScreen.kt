@@ -1,7 +1,5 @@
-// SPDX-License-Identifier: GPL-3.0-only
 package helium314.keyboard.settings.screens
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -9,42 +7,34 @@ import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.content.edit
 import androidx.core.net.toUri
 import helium314.keyboard.latin.BuildConfig
 import helium314.keyboard.latin.R
 import helium314.keyboard.latin.common.Links
 import helium314.keyboard.latin.settings.DebugSettings
 import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.utils.Log
 import helium314.keyboard.latin.utils.SpannableStringUtils
-import helium314.keyboard.latin.utils.getActivity
+import helium314.keyboard.latin.utils.Theme
 import helium314.keyboard.latin.utils.prefs
+import helium314.keyboard.latin.utils.previewDark
+import helium314.keyboard.settings.SearchSettingsScreen
+import helium314.keyboard.settings.Setting
+import helium314.keyboard.settings.SettingsActivity
 import helium314.keyboard.settings.SettingsContainer
 import helium314.keyboard.settings.SettingsWithoutKey
-import helium314.keyboard.settings.Setting
 import helium314.keyboard.settings.preferences.Preference
-import helium314.keyboard.settings.SearchSettingsScreen
-import helium314.keyboard.settings.SettingsActivity
-import helium314.keyboard.latin.utils.Theme
-import helium314.keyboard.latin.utils.previewDark
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import androidx.core.content.edit
-import java.util.Locale
 
 @Composable
 fun AboutScreen(
@@ -53,6 +43,7 @@ fun AboutScreen(
     val items = listOf(
         SettingsWithoutKey.APP,
         SettingsWithoutKey.VERSION,
+        SettingsWithoutKey.CHECK_UPDATES,
         SettingsWithoutKey.HIDDEN_FEATURES,
     )
     SearchSettingsScreen(
@@ -95,6 +86,32 @@ fun createAboutSettings(context: Context) = listOf(
             icon = R.drawable.ic_settings_about
         )
     },
+    Setting(context, SettingsWithoutKey.CHECK_UPDATES, R.string.update_check_title, R.string.update_check_desc) {
+        val ctx = LocalContext.current
+        var updateInfo by remember { mutableStateOf<helium314.keyboard.settings.updater.UpdateInfo?>(null) }
+        var isChecking by remember { mutableStateOf(false) }
+
+        if (updateInfo != null) {
+            helium314.keyboard.settings.updater.UpdateDialog(
+                updateInfo = updateInfo!!,
+                onDismissRequest = { updateInfo = null }
+            )
+        }
+
+        Preference(
+            name = it.title,
+            description = if (isChecking) stringResource(R.string.update_downloading) else it.description,
+            onClick = {
+                if (isChecking) return@Preference
+                isChecking = true
+                helium314.keyboard.settings.updater.UpdateManager.checkForUpdate(ctx, isManual = true) { info ->
+                    isChecking = false
+                    updateInfo = info
+                }
+            },
+            icon = R.drawable.ic_cloud_download
+        )
+    },
     Setting(context, SettingsWithoutKey.LICENSE, R.string.license, R.string.gnu_gpl) {
         val ctx = LocalContext.current
         Preference(
@@ -115,8 +132,6 @@ fun createAboutSettings(context: Context) = listOf(
             name = it.title,
             description = it.description,
             onClick = {
-                // Compose dialogs are in a rather sad state. They don't understand HTML, and don't scroll without customization.
-                // this should be re-done in compose, but... bah
                 val link = ("<a href=\"https://developer.android.com/reference/android/content/Context#createDeviceProtectedStorageContext()\">"
                         + ctx.getString(R.string.hidden_features_text) + "</a>")
                 val message = ctx.getString(R.string.hidden_features_message, link)
