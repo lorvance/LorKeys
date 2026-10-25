@@ -290,4 +290,14 @@
     <string name="update_check_desc">Kiểm tra các phiên bản LorKeys mới trên GitHub</string>
     <string name="update_no_updates">Bạn đang sử dụng phiên bản LorKeys mới nhất (%s)</string>
     <string name="update_error">Không thể kiểm tra cập nhật: %s</string>
+
+    <string name="secret_clipboard_tips_title">Mẹo bí mật</string>
+    <string name="secret_clipboard_tips_summary">Thay thế mẹo khay nhớ tạm bằng các mẹo phong cách đặc biệt</string>
+    <string name="predictive_back_title">Cử chỉ Quay lại dự đoán</string>
+    <string name="predictive_back_summary">Hiệu ứng chuyển cảnh mượt mà của hệ thống khi quay lại trong cài đặt</string>
+    <string name="clipboard_secret_tip_1">Gặp gỡ 🌹🌷😂😍🪲😍😂🍂😂😉✌️\n\n🌷😭😭☂️🌷🏳️‍⚧️🪲🩰🩰🏳️‍🌈🏳️‍🌈☂️🪲🌷😍🍂\nbàn phím LorKeys! Tại đây\nvăn bản bạn 🪲😍🥺🥺😍🌹😍🌹😭🥺\nsao chép sẽ 🪷🥺🥺\n🤪🪲🪲 được lưu lại. 🪲🪷😂👽🤪✌️😂🪲\n😭🥺🏳️‍⚧️</string>
+    <string name="clipboard_secret_tip_2">Chạm vào đoạn 🪲✨🥺🥺😂✌️🌷\nđể dán ngay 🤪🩰🩰🏳️‍🌈\nvào ô văn bản 🍂😍🌹\nnào các bạn! 😭😭☂️🏳️‍⚧️👽✨</string>
+    <string name="clipboard_secret_tip_3">Ghim, thêm hoặc xóa 🌹✌️😭\ncác đoạn trích 🪲😂🍂😍\nbằng biểu tượng 🩰🩰🥺🪷\nchỉnh sửa ảo diệu! 🤪☂️🏳️‍🌈✨</string>
+    <string name="clipboard_secret_tip_4">Nhấn và giữ chặt 🥺🪲😍🍂\nđể ghim đoạn lại 😭✌️🌹!\nMục chưa ghim 🤪🩰🩰☂️\nsẽ biến mất sau 1 giờ 🪷👽🏳️‍⚧️😭</string>
+
 </resources>

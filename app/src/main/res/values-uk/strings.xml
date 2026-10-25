@@ -650,4 +650,20 @@
     <string name="pref_emoji_font_preset_title">Шрифт емодзі</string>
     <string name="emoji_preset_stock">Системний (за замовчуванням)</string>
     <string name="emoji_preset_ios">iOS (Apple Color Emoji)</string>
+
+    <string name="clipboard_tips_section_header">Поради</string>
+    <string name="clipboard_tip_gboard_welcome">Знайомтеся з клавіатурою LorKeys! Тут зберігатиметься скопійований текст.</string>
+    <string name="clipboard_tip_gboard_paste">Торкніться фрагмента, щоб вставити його в поле введення.</string>
+    <string name="clipboard_tip_gboard_edit">Використовуйте значок редагування, щоб закріплювати чи видаляти фрагменти.</string>
+    <string name="clipboard_tip_gboard_pin">Затисніть фрагмент, щоб закріпити. Незакріплені видаляються через годину.</string>
+
+    <string name="secret_clipboard_tips_title">Секретні підказки</string>
+    <string name="secret_clipboard_tips_summary">Замінює підказки буфера обміну на особливі</string>
+    <string name="predictive_back_title">Предиктивний жест «Назад»</string>
+    <string name="predictive_back_summary">Системна плавна анімація повернення назад у налаштуваннях</string>
+    <string name="clipboard_secret_tip_1">Знайомт 🌹🌷😂😍🪲😍😂🍂😂😉✌️\n\n🌷😭😭☂️🌷🏳️‍⚧️🪲🩰🩰🏳️‍🌈🏳️‍🌈☂️🪲🌷😍🍂\nеся з клавіатурою LorKeys! Тут\nбуде збе 🪲😍🥺🥺😍🌹😍🌹😭🥺\nрігатися текст, який ви 🪷🥺🥺\n🤪🪲🪲 копіюєте. 🪲🪷😂👽🤪✌️😂🪲\n😭🥺🏳️‍⚧️</string>
+    <string name="clipboard_secret_tip_2">Торкніться 🪲✨🥺🥺😂✌️🌷\nфрагмента 🤪🩰🩰🏳️‍🌈\nщоб вставити його 🍂😍🌹\nу текстове поле! 😭😭☂️🏳️‍⚧️👽✨</string>
+    <string name="clipboard_secret_tip_3">Закріплюйте, видаляйте 🌹✌️😭\nфрагменти через 🪲😂🍂😍\nзначок 🩰🩰🥺🪷\nредагування! 🤪☂️🏳️‍🌈✨</string>
+    <string name="clipboard_secret_tip_4">Затисніть і тримайте 🥺🪲😍🍂\nфрагмент! 😭✌️🌹\nБо через годину 🤪🩰🩰☂️\nвін зникне безслідно 🪷👽🏳️‍⚧️😭</string>
+
 </resources>

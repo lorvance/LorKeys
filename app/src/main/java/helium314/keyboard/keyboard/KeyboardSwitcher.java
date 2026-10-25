@@ -1097,11 +1097,13 @@ public final class KeyboardSwitcher implements KeyboardState.SwitchActions {
             mAiWritingToolsView.setVisibility(View.GONE);
             mAiWritingToolsView.onClose();
         }
-        if (mTranslateView != null) {
+        if (mTranslateView != null && !helium314.keyboard.keyboard.internal.TranslateManager.INSTANCE.isTranslateActive()) {
             mTranslateView.setVisibility(View.GONE);
             mTranslateView.onClose();
+            helium314.keyboard.keyboard.internal.TranslateManager.INSTANCE.close(mLatinIME);
+        } else if (mTranslateView != null && helium314.keyboard.keyboard.internal.TranslateManager.INSTANCE.isTranslateActive()) {
+            mTranslateView.setVisibility(View.VISIBLE);
         }
-        helium314.keyboard.keyboard.internal.TranslateManager.INSTANCE.close(mLatinIME);
         if (mAccessPointMenuView != null) {
             mAccessPointMenuView.setVisibility(View.GONE);
         }

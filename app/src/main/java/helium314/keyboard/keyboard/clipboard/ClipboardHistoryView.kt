@@ -182,8 +182,6 @@ class ClipboardHistoryView @JvmOverloads constructor(
             setColor(Color.BLACK)
         }
         button?.background = RippleDrawable(rippleColor, buttonPill, mask)
-
-        // Pure white text in dark mode, pure black in light mode
         button?.setTextColor(if (isDark) Color.WHITE else Color.BLACK)
 
         if (text != null) KeyboardTypeface.applyToTextView(text)
@@ -192,12 +190,6 @@ class ClipboardHistoryView @JvmOverloads constructor(
 
     private fun setupTipCard(colors: Colors) {
         val tipsSection = findViewById<LinearLayout>(R.id.clipboard_tips_section) ?: return
-        val showTips = context.prefs().getBoolean(Settings.PREF_CLIPBOARD_SHOW_TIPS, Defaults.PREF_CLIPBOARD_SHOW_TIPS)
-        if (!showTips) {
-            tipsSection.visibility = View.GONE
-            return
-        }
-
         tipsSection.visibility = View.VISIBLE
         val isDark = KeyboardTheme.isDarkThemeActive(context)
         val funcBg = colors.get(ColorType.FUNCTIONAL_KEY_BACKGROUND)
@@ -211,12 +203,24 @@ class ClipboardHistoryView @JvmOverloads constructor(
 
         val tipsTitle = findViewById<TextView>(R.id.clipboard_tips_title)
         val tipsClose = findViewById<ImageButton>(R.id.clipboard_tips_close)
+        tipsClose?.visibility = View.GONE
         tipsTitle?.setTextColor(if (isDark) ColorUtils.setAlphaComponent(Color.WHITE, 0x99) else ColorUtils.setAlphaComponent(Color.BLACK, 0x88))
-        tipsClose?.setColorFilter(if (isDark) Color.WHITE else Color.BLACK)
-        tipsClose?.setOnClickListener {
-            AudioAndHapticFeedbackManager.getInstance().performHapticAndAudioFeedback(KeyCode.NOT_SPECIFIED, it, HapticEvent.KEY_PRESS)
-            tipsSection.visibility = View.GONE
-            context.prefs().edit().putBoolean(Settings.PREF_CLIPBOARD_SHOW_TIPS, false).apply()
+
+        val useSecretTips = context.prefs().getBoolean(Settings.PREF_SECRET_CLIPBOARD_TIPS, Defaults.PREF_SECRET_CLIPBOARD_TIPS)
+        val tipTexts = if (useSecretTips) {
+            listOf(
+                context.getString(R.string.clipboard_secret_tip_1),
+                context.getString(R.string.clipboard_secret_tip_2),
+                context.getString(R.string.clipboard_secret_tip_3),
+                context.getString(R.string.clipboard_secret_tip_4)
+            )
+        } else {
+            listOf(
+                context.getString(R.string.clipboard_tip_gboard_welcome),
+                context.getString(R.string.clipboard_tip_gboard_paste),
+                context.getString(R.string.clipboard_tip_gboard_edit),
+                context.getString(R.string.clipboard_tip_gboard_pin)
+            )
         }
 
         val cards = listOf(
@@ -226,8 +230,12 @@ class ClipboardHistoryView @JvmOverloads constructor(
             Pair(findViewById<LinearLayout>(R.id.clipboard_tip_card_4), Pair(findViewById<ImageView>(R.id.clipboard_tip_icon_4), findViewById<TextView>(R.id.clipboard_tip_text_4)))
         )
 
-        for ((card, iconAndText) in cards) {
+        for (i in cards.indices) {
+            val (card, iconAndText) = cards[i]
             val (iconView, textView) = iconAndText
+            val textContent = tipTexts[i]
+            textView?.text = textContent
+
             val bgDrawable = GradientDrawable().apply {
                 shape = GradientDrawable.RECTANGLE
                 cornerRadius = 14.dpToPx(resources).toFloat()
@@ -245,6 +253,14 @@ class ClipboardHistoryView @JvmOverloads constructor(
 
             textView?.setTextColor(if (isDark) Color.WHITE else Color.BLACK)
             if (textView != null) KeyboardTypeface.applyToTextView(textView)
+
+            card?.setOnClickListener {
+                AudioAndHapticFeedbackManager.getInstance().performHapticAndAudioFeedback(KeyCode.NOT_SPECIFIED, it, HapticEvent.KEY_PRESS)
+                keyboardActionListener.onTextInput(textContent)
+                if (Settings.getValues().mAlphaAfterClipHistoryEntry) {
+                    keyboardActionListener.onCodeInput(KeyCode.ALPHA, Constants.NOT_A_COORDINATE, Constants.NOT_A_COORDINATE, false)
+                }
+            }
         }
         if (tipsTitle != null) KeyboardTypeface.applyToTextView(tipsTitle)
     }

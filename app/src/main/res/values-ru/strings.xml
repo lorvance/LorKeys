@@ -774,4 +774,13 @@
     <string name="update_check_desc">Проверить наличие новой версии LorKeys на GitHub</string>
     <string name="update_no_updates">У вас установлена актуальная версия LorKeys (%s)</string>
     <string name="update_error">Не удалось проверить обновления: %s</string>
+
+    <string name="secret_clipboard_tips_title">Секретные подсказки</string>
+    <string name="secret_clipboard_tips_summary">Заменяет подсказки буфера обмена на особые</string>
+    <string name="predictive_back_title">Предиктивный жест «Назад»</string>
+    <string name="predictive_back_summary">Системная плавная анимация возврата назад в настройках</string>
+    <string name="clipboard_secret_tip_1">Знакомьт 🌹🌷😂😍🪲😍😂🍂😂😉✌️\n\n🌷😭😭☂️🌷🏳️‍⚧️🪲🩰🩰🏳️‍🌈🏳️‍🌈☂️🪲🌷😍🍂\nесть с клавиатурой LorKeys! Здесь\nбудет со 🪲😍🥺🥺😍🌹😍🌹😭🥺\nхраняться текст, который вы 🪷🥺🥺\n🤪🪲🪲 копируете. 🪲🪷😂👽🤪✌️😂🪲\n😭🥺🏳️‍⚧️</string>
+    <string name="clipboard_secret_tip_2">Нажми 🪲✨🥺🥺😂✌️🌷\nна фрагментик 🤪🩰🩰🏳️‍🌈\nчтобы вставить его 🍂😍🌹\nв текстовое поле 😭😭☂️🏳️‍⚧️👽✨</string>
+    <string name="clipboard_secret_tip_3">Закрепляй, удаляй 🌹✌️😭\nи твори хаос 🪲😂🍂😍\nчерез значок 🩰🩰🥺🪷\nредактирования! 🤪☂️🏳️‍🌈✨</string>
+    <string name="clipboard_secret_tip_4">Зажми и держи 🥺🪲😍🍂\nфрагмент изо всех сил 😭✌️🌹!\nА то через час 🤪🩰🩰☂️\nон исчезнет навсегда 🪷👽🏳️‍⚧️😭</string>
 </resources>

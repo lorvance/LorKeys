@@ -214,6 +214,20 @@ public final class EmojiPalettesView extends LinearLayout
                 }
             });
         }
+        final ImageButton searchButton = tabStripView.findViewById(R.id.emoji_search_button);
+        if (searchButton != null) {
+            mColors.setColor(searchButton, ColorType.FUNCTIONAL_KEY_TEXT);
+            searchButton.setBackground(createBackButtonBackground(mColors));
+            searchButton.setPadding(0, 0, 0, 0);
+            searchButton.setScaleType(ImageView.ScaleType.CENTER);
+            searchButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AudioAndHapticFeedbackManager.getInstance().performHapticAndAudioFeedback(KeyCode.NOT_SPECIFIED, v, HapticEvent.KEY_PRESS);
+                    enterSearchMode();
+                }
+            });
+        }
         if (Settings.getValues().mSecondaryStripVisible) {
             for (final EmojiCategory.CategoryProperties properties : mEmojiCategory.getShownCategories()) {
                 addTab(mTabStrip, properties.mCategoryId);

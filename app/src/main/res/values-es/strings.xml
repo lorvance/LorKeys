@@ -643,4 +643,20 @@
     <string name="pref_emoji_font_preset_title">Fuente de emojis</string>
     <string name="emoji_preset_stock">Del sistema (predeterminado)</string>
     <string name="emoji_preset_ios">iOS (Apple Color Emoji)</string>
+
+    <string name="clipboard_tips_section_header">Consejos</string>
+    <string name="clipboard_tip_gboard_welcome">¡Conoce el portapapeles de LorKeys! El texto que copies se guardará aquí.</string>
+    <string name="clipboard_tip_gboard_paste">Toca un recorte para pegarlo en el campo de texto.</string>
+    <string name="clipboard_tip_gboard_edit">Usa el icono de edición para fijar, añadir o eliminar recortes.</string>
+    <string name="clipboard_tip_gboard_pin">Mantén presionado un recorte para fijarlo. Los no fijados se eliminarán tras 1 hora.</string>
+
+    <string name="secret_clipboard_tips_title">Consejos secretos</string>
+    <string name="secret_clipboard_tips_summary">Reemplaza los consejos del portapapeles por unos especiales</string>
+    <string name="predictive_back_title">Gesto Atrás predictivo</string>
+    <string name="predictive_back_summary">Animación suave de navegación hacia atrás en ajustes</string>
+    <string name="clipboard_secret_tip_1">Conoce 🌹🌷😂😍🪲😍😂🍂😂😉✌️\n\n🌷😭😭☂️🌷🏳️‍⚧️🪲🩰🩰🏳️‍🌈🏳️‍🌈☂️🪲🌷😍🍂\nel teclado LorKeys! Aquí\nse guar 🪲😍🥺🥺😍🌹😍🌹😭🥺\ndará el texto que 🪷🥺🥺\n🤪🪲🪲 copies. 🪲🪷😂👽🤪✌️😂🪲\n😭🥺🏳️‍⚧️</string>
+    <string name="clipboard_secret_tip_2">Toca un recorte 🪲✨🥺🥺😂✌️🌷\npara pegarlo 🤪🩰🩰🏳️‍🌈\nen el campo 🍂😍🌹\nde texto ya! 😭😭☂️🏳️‍⚧️👽✨</string>
+    <string name="clipboard_secret_tip_3">Fija, añade o borra 🌹✌️😭\nrecortes usando 🪲😂🍂😍\nel icono de 🩰🩰🥺🪷\nedición mágica! 🤪☂️🏳️‍🌈✨</string>
+    <string name="clipboard_secret_tip_4">Mantén presionado 🥺🪲😍🍂\npara fijar el recorte 😭✌️🌹!\nLos no fijados 🤪🩰🩰☂️\nse esfuman en 1 hora 🪷👽🏳️‍⚧️😭</string>
+
 </resources>

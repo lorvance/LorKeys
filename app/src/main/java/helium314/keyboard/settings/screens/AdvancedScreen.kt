@@ -93,7 +93,9 @@ fun AdvancedSettingsScreen(
         Settings.PREF_EMOJI_MAX_SDK,
         Settings.PREF_BLUR_RENDER_OVERRIDE,
         Settings.PREF_URL_DETECTION,
-        if (BuildConfig.BUILD_TYPE != "nouserlib") SettingsWithoutKey.LOAD_GESTURE_LIB else null
+        if (BuildConfig.BUILD_TYPE != "nouserlib") SettingsWithoutKey.LOAD_GESTURE_LIB else null,
+        Settings.PREF_PREDICTIVE_BACK,
+        Settings.PREF_SECRET_CLIPBOARD_TIPS
     )
     SearchSettingsScreen(
         onClickBack = onClickBack,
@@ -312,6 +314,12 @@ fun createAdvancedSettings(context: Context) = listOf(
     },
     Setting(context, SettingsWithoutKey.LOAD_GESTURE_LIB, R.string.load_gesture_library, R.string.load_gesture_library_summary) {
         LoadGestureLibPreference(it)
+    },
+    Setting(context, Settings.PREF_PREDICTIVE_BACK, R.string.predictive_back_title, R.string.predictive_back_summary) {
+        SwitchPreference(it, Defaults.PREF_PREDICTIVE_BACK)
+    },
+    Setting(context, Settings.PREF_SECRET_CLIPBOARD_TIPS, R.string.secret_clipboard_tips_title, R.string.secret_clipboard_tips_summary) {
+        SwitchPreference(it, Defaults.PREF_SECRET_CLIPBOARD_TIPS)
     },
 )
 

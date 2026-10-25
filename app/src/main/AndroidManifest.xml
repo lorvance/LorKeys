@@ -42,7 +42,7 @@ SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
             <intent-filter>
                 <action android:name="android.view.InputMethod" />
             </intent-filter>
-            <meta-data android:name="android.view.im" android:resource="@xml/method" />
+            <meta-data android:name="android.view.im" android:resource="@xml/method_dummy" />
         </service>
 
         <service android:name=".spellcheck.AndroidSpellCheckerService"

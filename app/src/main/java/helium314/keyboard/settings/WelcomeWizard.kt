@@ -260,7 +260,7 @@ fun WelcomeWizard(
     }
 
     val isSplash = currentScreen == WizardScreen.Splash
-    val buttonText = if (isSplash) stringResource(R.string.wizard_get_started) else stringResource(R.string.setup_steps_title)
+    val buttonText = if (isSplash) stringResource(R.string.wizard_get_started) else stringResource(R.string.setup_steps_title, stringResource(R.string.english_ime_name))
 
     val circleBgColor by animateColorAsState(
         targetValue = if (isSplash) {

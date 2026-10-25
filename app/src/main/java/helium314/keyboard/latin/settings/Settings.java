@@ -212,6 +212,8 @@ public final class Settings implements SharedPreferences.OnSharedPreferenceChang
     public static final String PREF_CLIPBOARD_HISTORY_RETENTION_TIME = "clipboard_history_retention_time";
     public static final String PREF_CLIPBOARD_HISTORY_PINNED_FIRST = "clipboard_history_pinned_first";
     public static final String PREF_CLIPBOARD_SHOW_TIPS = "pref_clipboard_show_tips";
+    public static final String PREF_SECRET_CLIPBOARD_TIPS = "pref_secret_clipboard_tips";
+    public static final String PREF_PREDICTIVE_BACK = "pref_predictive_back";
 
     public static final String PREF_ADD_TO_PERSONAL_DICTIONARY = "add_to_personal_dictionary";
     public static final String PREF_NAVBAR_COLOR = "navbar_color";

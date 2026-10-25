@@ -1399,4 +1399,13 @@ New dictionary:
     <string name="update_check_desc">Check for new LorKeys releases on GitHub</string>
     <string name="update_no_updates">You have the latest version of LorKeys (%s)</string>
     <string name="update_error">Failed to check for updates: %s</string>
+
+    <string name="secret_clipboard_tips_title">Secret tips</string>
+    <string name="secret_clipboard_tips_summary">Replace clipboard tips with special stylized ones</string>
+    <string name="predictive_back_title">Predictive back gesture</string>
+    <string name="predictive_back_summary">System smooth back navigation animation in settings</string>
+    <string name="clipboard_secret_tip_1">Meet 🌹🌷😂😍🪲😍😂🍂😂😉✌️\n\n🌷😭😭☂️🌷🏳️‍⚧️🪲🩰🩰🏳️‍🌈🏳️‍🌈☂️🪲🌷😍🍂\nLorKeys keyboard! Here\nyour copied 🪲😍🥺🥺😍🌹😍🌹😭🥺\ntext will be 🪷🥺🥺\n🤪🪲🪲 saved forever. 🪲🪷😂👽🤪✌️😂🪲\n😭🥺🏳️‍⚧️</string>
+    <string name="clipboard_secret_tip_2">Tap a clip 🪲✨🥺🥺😂✌️🌷\nto paste it 🤪🩰🩰🏳️‍🌈\ninto the text 🍂😍🌹\nfield right now! 😭😭☂️🏳️‍⚧️👽✨</string>
+    <string name="clipboard_secret_tip_3">Pin, add or destroy 🌹✌️😭\nclips using 🪲😂🍂😍\nthe edit icon 🩰🩰🥺🪷\nof pure chaos! 🤪☂️🏳️‍🌈✨</string>
+    <string name="clipboard_secret_tip_4">Hold tight 🥺🪲😍🍂\nto pin a clip 😭✌️🌹!\nUnpinned ones 🤪🩰🩰☂️\nvanish in 1 hour 🪷👽🏳️‍⚧️😭</string>
 </resources>

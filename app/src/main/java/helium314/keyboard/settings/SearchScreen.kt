@@ -168,9 +168,8 @@ fun <T: Any?> SearchScreen(
         showSearch = value
         if (!value) searchText = TextFieldValue()
     }
-    BackHandler {
-        if (showSearch || searchText.text.isNotEmpty()) setShowSearch(false)
-        else onClickBack()
+    BackHandler(enabled = showSearch || searchText.text.isNotEmpty()) {
+        setShowSearch(false)
     }
     
     val isDark = isSystemInDarkTheme()

@@ -204,15 +204,21 @@ object SubtypeSettings {
         subtypes.map { it.toPref() }.toSortedSet().joinToString(Separators.SETS)
 
     fun init(context: Context) {
-        SubtypeLocaleUtils.init(context) // necessary to get the correct getKeyboardLayoutSetName
-
-        // necessary to set system locales at start, because for some weird reason (bug?)
-        // LocaleManagerCompat.getSystemLocales(context) sometimes doesn't return all system locales
+        SubtypeLocaleUtils.init(context)
         reloadSystemLocales(context)
-
         loadResourceSubtypes(context.resources)
         loadAdditionalSubtypes(context.prefs())
         loadEnabledSubtypes(context)
+        if (enabledSubtypes.isEmpty()) {
+            val defaultSubtypes = getDefaultEnabledSubtypes()
+            for (sub in defaultSubtypes) {
+                if (sub !in enabledSubtypes) {
+                    enabledSubtypes.add(sub)
+                }
+            }
+            val settingsSubtypes = enabledSubtypes.map { it.toSettingsSubtype() }
+            context.prefs().edit { putString(Settings.PREF_ENABLED_SUBTYPES, createPrefSubtypes(settingsSubtypes)) }
+        }
         updateSystemSubtypes(context)
     }
 
@@ -221,15 +227,17 @@ object SubtypeSettings {
         if (systemSubtypes.isNotEmpty()) return systemSubtypes
         val subtypes = systemLocales.mapNotNull { locale ->
             val subtypesOfLocale = resourceSubtypesByLocale[locale]
-            // get best match
                 ?: LocaleUtils.getBestMatch(locale, resourceSubtypesByLocale.keys) {it}?.let { resourceSubtypesByLocale[it] }
             subtypesOfLocale?.firstOrNull()
         }
         if (subtypes.isEmpty()) {
-            // hardcoded fallback to en-US for weird cases
             systemSubtypes.add(resourceSubtypesByLocale[Locale.US]!!.first())
         } else {
             systemSubtypes.addAll(subtypes)
+            val hasEnglish = systemSubtypes.any { it.locale().language == "en" }
+            if (!hasEnglish && resourceSubtypesByLocale.containsKey(Locale.US)) {
+                resourceSubtypesByLocale[Locale.US]?.firstOrNull()?.let { systemSubtypes.add(it) }
+            }
         }
         return systemSubtypes
     }
@@ -303,15 +311,6 @@ object SubtypeSettings {
     }
 
     private fun updateSystemSubtypes(context: Context) {
-        try {
-            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? android.view.inputmethod.InputMethodManager ?: return
-            val imePackageName = context.packageName
-            val imi = imm.inputMethodList.firstOrNull { it.packageName == imePackageName } ?: return
-            val subtypes = getEnabledSubtypes(fallback = true)
-            imm.setAdditionalInputMethodSubtypes(imi.id, subtypes.toTypedArray())
-        } catch (e: Exception) {
-            Log.e(TAG, "Failed to update system subtypes", e)
-        }
     }
 
     private val enabledSubtypes = mutableListOf<InputMethodSubtype>()
